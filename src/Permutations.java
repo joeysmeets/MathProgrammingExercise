@@ -60,7 +60,7 @@ public class Permutations {
 				if (leftValue > rightValue) { // if the left value is bigger than the right value, the counter it incremented. 
 					counter++;
 				}
-				lehmerCode[i] = counter; 
+				lehmerCode[i] = counter;  
 			}
 		}
 		return lehmerCode;
@@ -107,37 +107,6 @@ public class Permutations {
 			//swap();
 		}
 		return permutations;
-	}
-	
-	 public static void rearrangeArray(int arr[]) {  
-	        // Sorting the array elements
-	    Arrays.sort(arr);
-	  
-	    int[] tempArr = new int[arr.length]; // To store modified array
-	     
-	    // Adding numbers from sorted array to
-	    // new array accordingly
-	    int ArrIndex = 0;
-	  
-	    // Traverse from begin and end simultaneously
-	    for (int i = 0, j = arr.length-1; i <= arr.length / 2 || j > arr.length / 2;
-	                                       i++, j--) {
-	        if(ArrIndex < arr.length)
-	        {
-	            tempArr[ArrIndex] = arr[i];
-	            ArrIndex++;
-	        }
-	         
-	        if(ArrIndex < arr.length)
-	        {
-	            tempArr[ArrIndex] = arr[j];
-	            ArrIndex++;
-	        }
-	    }
-	  
-	    // Modifying original array
-	    for (int i = 0; i < arr.length; i++)
-	        arr[i] = tempArr[i];
 	}
 }
 	
