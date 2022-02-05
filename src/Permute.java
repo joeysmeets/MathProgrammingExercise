@@ -1,93 +1,81 @@
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.NoSuchElementException;
 import java.lang.reflect.Array;
 
-public class Permute implements Iterator {
+public class Permute {
 
-   private final int size;
-   private final Object [] elements;  // copy of original 0 .. size-1
-   private final Object ar;           // array for output,  0 .. size-1
-   private final int [] permutation;  // perm of nums 1..size, perm[0]=0
+	public static void main(String[] args){
+	    int[] list = {1,2,3,4,5};
+	    List<List<Integer>> output = new Main().permute(list);
+	    for(List result: output){
+	    	System.out.println(result);
+	    }
 
-   private boolean next = true;
+	}
 
-   // int[], double[] array won't work :-(
-   public Permute (Object [] e) {
-      size = e.length;
-      elements = new Object [size];    // not suitable for primitives
-      System.arraycopy (e, 0, elements, 0, size);
-      ar = Array.newInstance (e.getClass().getComponentType(), size);
-      System.arraycopy (e, 0, ar, 0, size);
-      permutation = new int [size+1];
-      for (int i=0; i<size+1; i++) { 
-         permutation [i]=i;
-      }
-   }
+	public List<List<Integer>> permute(int[] nums) {
+	    List<List<Integer>> list = new ArrayList<List<Integer>>();
+	    int size = factorial(nums.length);
 
-   private void formNextPermutation () {
-      for (int i=0; i<size; i++) {
-         // i+1 because perm[0] always = 0
-         // perm[]-1 because the numbers 1..size are being permuted
-         Array.set (ar, i, elements[permutation[i+1]-1]);
-      }
-   }
+	    // add the original one to the list
+	    List<Integer> seq = new ArrayList<Integer>();
+	    for(int a:nums){
+	        seq.add(a);
+	    }
+	    list.add(seq);
 
-   public boolean hasNext() {
-      return next;
-   }
+	    // generate the next and next permutation and add them to list
+	    for(int i = 0;i < size - 1;i++){
+	        seq = new ArrayList<Integer>();
+	        nextPermutation(nums);
+	        for(int a:nums){
+	            seq.add(a);
+	        }
+	        list.add(seq);
+	    }
+	    return list;
+	}
 
-   public void remove() throws UnsupportedOperationException {
-      throw new UnsupportedOperationException();
-   }
 
-   private void swap (final int i, final int j) {
-      final int x = permutation[i];
-      permutation[i] = permutation [j];
-      permutation[j] = x;
-   }
+	int factorial(int n){
+	    return (n==1)?1:n*factorial(n-1);
+	}
 
-   // does not throw NoSuchElement; it wraps around!
-   public Object next() throws NoSuchElementException {
+	void nextPermutation(int[] nums){
+	    int i = nums.length -1; // start from the end
 
-      formNextPermutation ();  // copy original elements
+	    while(i > 0 && nums[i-1] >= nums[i]){
+	        i--;
+	    }
 
-      int i = size-1;
-      while (permutation[i]>permutation[i+1]) i--;
+	    if(i==0){
+	        reverse(nums,0,nums.length -1 );
+	    }else{
 
-      if (i==0) {
-         next = false;
-         for (int j=0; j<size+1; j++) {
-            permutation [j]=j;
-         }
-         return ar;
-      }
+	        // found the first one not in order 
+	        int j = i;
 
-      int j = size;
+	        // found just bigger one
+	        while(j < nums.length && nums[j] > nums[i-1]){
+	            j++;
+	        }
+	        //swap(nums[i-1],nums[j-1]);
+	        int tmp = nums[i-1];
+	        nums[i-1] = nums[j-1];
+	        nums[j-1] = tmp;
+	        reverse(nums,i,nums.length-1);  
+	    }
+	}
 
-      while (permutation[i]>permutation[j]) j--;
-      swap (i,j);
-      int r = size;
-      int s = i+1;
-      while (r>s) { swap(r,s); r--; s++; }
-
-      return ar;
-   }
-
-   public String toString () {
-      final int n = Array.getLength(ar);
-      final StringBuffer sb = new StringBuffer ("[");
-      for (int j=0; j<n; j++) {
-         sb.append (Array.get(ar,j).toString());
-         if (j<n-1) sb.append (",");
-      }
-      sb.append("]");
-      return new String (sb);
-   }
-
-   public static void main (String [] args) {
-      for (Iterator i = new Permute(args); i.hasNext(); ) {
-         final String [] a = (String []) i.next();
-         System.out.println (i);
-      }
-   }
+	// reverse the sequence
+	void reverse(int[] arr,int start, int end){
+	    int tmp;
+	    for(int i = 0; i <= (end - start)/2; i++ ){
+	        tmp = arr[start + i];
+	        arr[start + i] = arr[end - i];
+	        arr[end - i ] = tmp;
+	    }
+	}
 }
