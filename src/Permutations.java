@@ -42,13 +42,14 @@ public class Permutations {
 //		
 //		System.out.println();
 //		
-//		int[] perm7   = {1, 2, 4, 3};
+		int[] perm7   = {1, 2, 3};
+		
+		for (int i = 0; i < 6; i++) {
+			perm7 = permute(perm7);
+			System.out.println(Arrays.toString(perm7));
+		}
+		
 //		System.out.println(Arrays.toString(permute(perm7)));
-//		
-//		for (int i = 0; i < 24; i++) {
-//			perm7 = permute(perm7);
-//			System.out.println(Arrays.toString(perm7));
-//		}
 //		
 //		fillWithAllPermutations(perm7); 
 //		for (int i = 0; i < permutations.size(); i++) {
@@ -97,9 +98,10 @@ public class Permutations {
 	 * Method to get the permutation belonging to the Lehmer code of a permutation
 	 * @param  int[] Lehmer Code
 	 * @param  int[] permutation you want to permute
+	 * @return 
 	 * @return int[] permutation belonging to the Lehmer code
 	 */
-	public static void getPerm(int[] lehmerCode, int[] ogPermutation) {
+	public static int[] getPerm(int[] lehmerCode, int[] ogPermutation) {
 		int[] permutation = new int[lehmerCode.length]; // instantiating the output array
 
 		ArrayList<Integer> ogPermutationCopy = new ArrayList<Integer>();		
@@ -123,12 +125,10 @@ public class Permutations {
 	 * Inspired by https://www.quora.com/How-would-you-explain-an-algorithm-that-generates-permutations-using-lexicographic-ordering 
 	 * 
 	 * @param  permutation int[] the permuation input
-	 * @return 
-	 * @return 
 	 */
 	public static int[] permute(int[] permutation) {
 		// STEP 1 - highest P[x] < P[x+1]
-		int largestI = -1;
+		int largestI = -1; 
 		for (int i = 0; i < permutation.length - 1; i++) {
 			if ( permutation[i] < permutation[i + 1]) {
 				largestI = i;
@@ -141,16 +141,13 @@ public class Permutations {
 				largestJ = j;
 			}
 		}
-		if (largestI == -1 || largestJ == -1) {
-			return permutation; // no permutation possible. This is permutation in the last lexicographic 
-		}
 		// STEP 3 - Swap P[x] and P[y]
 		permutation = swap(permutation, largestI, largestJ);
 		// STEP 4 = reserve from largestI + 1 to the end
 		permutation = invertArrayFrom(permutation, largestI);
 		// adding the permutation to the ArrayList
 		permutations.add(permutation);
-//		return permutation;
+		return permutation;
 	}
 	
 	/**

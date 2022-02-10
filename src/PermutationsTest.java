@@ -48,7 +48,7 @@ class PermutationsTest extends Permutations{
 		int[] lehmer = {4, 1, 0, 1, 0};
 		int[] perm 	 = {5000,2000,1000,4000,3000};
 		assertArrayEquals(perm, getPerm(lehmer, ogPerm));	
-	}  
+	}   
 	
 	@Test
 	void lehmerCodeToPermManyValues() {

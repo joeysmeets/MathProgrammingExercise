@@ -1,0 +1,16 @@
+#BlueJ class context
+comment0.target=testSLE
+comment0.text=\n\ \ \ \ \ \ \ \ Lineare\ Gleichungssysteme\ \ \n\ \ \ \ \ \ \ \ In\ der\ Klasse\ SLE.java\ m\u00FCssen\ Sie\ folgende\ Methoden\ schreiben\n\ \ \ \ \ \ \ \ \ \ \ \ \n\ \ \ \ \ \ \ \ public\ static\ double[][]\ calcNF2(double[][]\ Ab)\ und\n\ \ \ \ \ \ \ \ public\ static\ double[][]\ solve(double[][]\ Ab)\n\ \ \ \ \ \ \ \ \ \ \ \ \n\ \ \ \ \ \ \ \ Eine\ Testdatei\ ist\ Test.txt;\ Format\:\ s.\ Programmieraufgaben.pdf.\n\ \ \ \ \ \ \ \ \ \ \n\ \ \ \ \ \ \ \ SLE\:\ \ System\ of\ Linear\ Equations\ Ax\ \=\ b\n\ \ \ \ \ \ \ \ NF2\:\ \ Zweite\ Normalform\n\ \ \ \ \ \ \ \ xhs\:\ \ xhs\ \=\ L\u00F6s(A,\ b)\ \=\ (xh|xs),\ wenn\ xh\ L\u00F6sungsvektoren\ des\ homogenen\ Systems\ Ax\ \=\ 0\ und\ xs\ spezielle\ L\u00F6sung\ des\ \n\ \ \ \ \ \ \ \ \ \ \ \ \ \ inhomogenen\ Systems\ sind.\n
+comment1.params=args
+comment1.target=void\ main(java.lang.String[])
+comment2.params=filename
+comment2.target=testSLE(java.lang.String)
+comment3.params=filename
+comment3.target=void\ test(java.lang.String)
+comment4.params=filename
+comment4.target=double[][]\ readMatrixFromFile(java.lang.String)
+comment5.params=M\ nrOfDigits
+comment5.target=void\ showMatrix(double[][],\ int)
+comment6.params=Ab\ xhs\ eps
+comment6.target=boolean\ solutionOK(double[][],\ double[][],\ double)
+numComments=7
